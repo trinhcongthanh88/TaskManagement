@@ -16,25 +16,26 @@ class TaskListVCtrl: UIViewController {
     var addUpdate:AddUpdateTaskViewModel!
     
     func callToViewModelForUIUpdate(){
-        
         self.taskList =  TaskListViewModel()
-        self.taskList.bindTaskLisViewModelToController = {
-            self.updateDataSource()
-        }
+        self.updateDataSource()
     }
     
     func getData() {
         // Do any additional setup after loading the view.
         taskList.callFuncToGetTaskListData()
         lstItem = taskList.taskListData.data
-        DispatchQueue.main.async {
-            self.tblTaskList.reloadData()
-        }
+        taskListSource.lstItem = lstItem
+        UIView.transition(with: tblTaskList,
+                          duration: 0.5,
+                          options: .transitionCrossDissolve,
+                          animations: { self.tblTaskList.reloadData() })
+            
     }
     
     fileprivate func updateDataSource() {
         taskListSource =  TaskListTableSource(tbv: tblTaskList, lstItem: lstItem)
         taskListSource.delegate = self
+        taskListSource.delegateCell = self
         getData()
         
     }
@@ -42,6 +43,7 @@ class TaskListVCtrl: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Base.navCtrl?.navigationBar.topItem?.title = "List Task"
+        addUpdate = AddUpdateTaskViewModel()
         self.callToViewModelForUIUpdate()
     }
 
@@ -52,14 +54,20 @@ class TaskListVCtrl: UIViewController {
         addUpdate.callFuncToDeleteTaskData()
         getData()
         taskListSource.lstItem = lstItem
-        tblTaskList.reloadData()
+        UIView.transition(with: tblTaskList,
+                          duration: 0.5,
+                          options: .transitionCrossDissolve,
+                          animations: { self.tblTaskList.reloadData() })
     }
     @IBAction func btnAddnew(_ sender: UIButton) {
 //        Base.navCtrl?.pushViewController(AddUpdateTaskVCtrl(), animated: true)
         addUpdate.callFuncToAddUpdateTaskData()
         getData()
         taskListSource.lstItem = lstItem
-        tblTaskList.reloadData()
+        UIView.transition(with: tblTaskList,
+                          duration: 0.5,
+                          options: .transitionCrossDissolve,
+                          animations: { self.tblTaskList.reloadData() })
     }
     /*
     // MARK: - Navigation
@@ -73,9 +81,17 @@ class TaskListVCtrl: UIViewController {
     */
 
 }
+extension TaskListVCtrl:TaskListTableCellDelegate{
+    func updateStatus(status: String) {
+        
+    }
+    
+    
+}
 extension TaskListVCtrl:TableViewDelegate{
     func tbv(tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
         let data = lstItem[indexPath.row]
+        addUpdate = AddUpdateTaskViewModel()
         addUpdate.model = data
 //        showTaskDetail(task: data)
     }

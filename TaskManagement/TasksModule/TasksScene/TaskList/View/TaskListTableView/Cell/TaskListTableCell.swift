@@ -6,17 +6,24 @@
 //
 
 import UIKit
-
-class TaskListTableCell: UITableViewCell {
+public protocol TaskListTableCellDelegate{
+    func updateStatus(status:String)
+}
+class TaskListTableCell: UITableViewCell,TaskListTableCellDelegate {
 
     @IBOutlet weak var lblStatus: UILabel!
     @IBOutlet weak var imgStatus: UIImageView!
     @IBOutlet weak var lbName: UILabel!
+    @IBOutlet weak var lbDes: UILabel!
     @IBOutlet weak var lblCreateDate: UILabel!
     @IBOutlet weak var lblDueDate: UILabel!
     @IBOutlet weak var lblHour: UILabel!
+    var delegate:TaskListTableCellDelegate?
+    
+    @IBOutlet weak var btnUpdateStatus: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
+        delegate = self
         // Initialization code
     }
 
@@ -58,5 +65,8 @@ class TaskListTableCell: UITableViewCell {
         }
     }
     
+    @IBAction func updateStatus_Touchup(_ sender: UIButton) {
+        delegate?.updateStatus(status: "3")
+    }
     
 }

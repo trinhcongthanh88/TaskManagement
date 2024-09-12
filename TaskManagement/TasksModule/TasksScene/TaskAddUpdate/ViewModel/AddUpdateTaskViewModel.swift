@@ -27,7 +27,7 @@ class AddUpdateTaskViewModel : NSObject {
     }
     
     func callFuncToAddUpdateTaskData() {
-       model = TaskModel( taskID: "01", name: "Task 1",des: "",userID: "",userName:"", status: "", createDate: "", startDate: "", dueDate: "", hour: "16")
+       model = TaskModel()
         taskModel = model
         self.saveData(model: self.taskModel)
     }
@@ -50,6 +50,8 @@ class AddUpdateTaskViewModel : NSObject {
         var data = TaskModel()
         data = model
         data.taskID = uuidString
+        data.name = data.taskID
+        data.des = "Thuc hien  1 du an ve quan ly Task"
         data.status = String(randomInt)
         data.createDate = dateFormatter.string(from: today)
         data.startDate = dateFormatter.string(from: today)

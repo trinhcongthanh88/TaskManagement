@@ -8,6 +8,7 @@
 import UIKit
 
 class TaskListTableSource: TableViewSource<TaskListTableCell,TaskModel> {
+    var delegateCell:TaskListTableCellDelegate?
     override init(tbv: UITableView, lstItem: [TaskModel]) {
         super.init(tbv: tbv,lstItem: lstItem)
     }
@@ -24,6 +25,7 @@ class TaskListTableSource: TableViewSource<TaskListTableCell,TaskModel> {
         let cell = cellDequeue
         let data = lstItem[indexPath.row]
         cell.updateCell(_data: data)
+        cell.delegate = delegateCell
         return cell
     }
     

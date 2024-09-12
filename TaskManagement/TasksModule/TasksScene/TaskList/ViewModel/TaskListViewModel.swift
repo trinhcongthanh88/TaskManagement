@@ -13,7 +13,7 @@ class TaskListViewModel : NSObject {
 //    private var apiService : APIService!
     private(set) var taskListData : TaskListData! {
         didSet {
-            self.bindTaskLisViewModelToController()
+//            self.bindTaskLisViewModelToController()
         }
     }
     
@@ -21,6 +21,7 @@ class TaskListViewModel : NSObject {
     
     override init() {
         super.init()
+        self.bindTaskLisViewModelToController()
 //        self.apiService =  APIService()
 //        callFuncToGetTaskListData()
     }

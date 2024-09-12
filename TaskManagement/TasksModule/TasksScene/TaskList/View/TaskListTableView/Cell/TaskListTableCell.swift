@@ -35,6 +35,7 @@ class TaskListTableCell: UITableViewCell,TaskListTableCellDelegate {
     
     func updateCell(_data:TaskModel ){
         lbName.text = _data.name
+        lbDes.text = _data.des
         updateStatus(status: _data.status)
         lblCreateDate.text = _data.startDate
         lblDueDate.text = _data.dueDate

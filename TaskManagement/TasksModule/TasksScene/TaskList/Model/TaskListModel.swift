@@ -41,10 +41,7 @@ class TaskModel:Object {
         self.dueDate = dueDate
         self.hour = hour
     }
-    convenience required init() {
-        self.init()
-    }
-    
+
 //    required convenience init() {
 //        self.init()
 //        //fatalError("init() has not been implemented")

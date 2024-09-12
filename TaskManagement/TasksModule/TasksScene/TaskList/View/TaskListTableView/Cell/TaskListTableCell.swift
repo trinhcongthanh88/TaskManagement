@@ -36,10 +36,12 @@ class TaskListTableCell: UITableViewCell,TaskListTableCellDelegate {
     func updateCell(_data:TaskModel ){
         lbName.text = _data.name
         lbDes.text = _data.des
+        btnUpdateStatus.isHidden = false
         updateStatus(status: _data.status)
         lblCreateDate.text = _data.startDate
         lblDueDate.text = _data.dueDate
         lblHour.text = _data.hour
+        
         
     }
     func updateStatus(status:String){
@@ -58,6 +60,7 @@ class TaskListTableCell: UITableViewCell,TaskListTableCellDelegate {
             lblStatus.text = "done"
             lblStatus.textColor = UIColor.green
             imgStatus.image = UIImage(named: "ic_status_done")
+            btnUpdateStatus.isHidden = true
             break
         default:
             lblStatus.text = "N/a"

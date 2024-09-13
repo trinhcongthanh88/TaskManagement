@@ -35,7 +35,9 @@ class AddUpdateTaskViewModel : NSObject {
         taskModel = model
         self.deleteData(model: self.taskModel)
     }
-
+    func callFuncToUpdateStatusTaskData(taskId:String ,status:String) {
+        self.updateTaskStats(taskId: taskId, status: status)
+    }
     
     private func saveData(model:TaskModel) {
         let randomUUID = UUID()
@@ -69,7 +71,8 @@ class AddUpdateTaskViewModel : NSObject {
                 realm.delete(dataFilters)
             }
         }
-    private func updateObject(model:TaskModel) {
+    
+    private func updateData(model:TaskModel) {
             let dataFilter =  realm.objects(TaskModel.self).filter("taskID = %@", model.taskID, model.name).toArray(ofType: TaskModel.self).first
             if let dataFilter = dataFilter {
                 try! realm.write {
@@ -79,6 +82,14 @@ class AddUpdateTaskViewModel : NSObject {
                     dataFilter.startDate =  model.startDate
                     dataFilter.dueDate =  model.dueDate
                     dataFilter.hour =  model.hour
+                }
+            }
+        }
+    private func updateTaskStats(taskId:String ,status:String) {
+            let dataFilter =  realm.objects(TaskModel.self).filter("taskID = %@", taskId).toArray(ofType: TaskModel.self).first
+            if let dataFilter = dataFilter {
+                try! realm.write {
+                    dataFilter.status =  status
                 }
             }
         }

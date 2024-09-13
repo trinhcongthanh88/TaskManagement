@@ -7,10 +7,11 @@
 
 import UIKit
 public protocol TaskListTableCellDelegate{
-    func updateStatus(status:String)
+    func updateStatusCell(taskId:String ,status:String)
 }
-class TaskListTableCell: UITableViewCell,TaskListTableCellDelegate {
+class TaskListTableCell: UITableViewCell {
 
+    @IBOutlet weak var vContent: UIView!
     @IBOutlet weak var lblStatus: UILabel!
     @IBOutlet weak var imgStatus: UIImageView!
     @IBOutlet weak var lbName: UILabel!
@@ -23,8 +24,14 @@ class TaskListTableCell: UITableViewCell,TaskListTableCellDelegate {
     @IBOutlet weak var btnUpdateStatus: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
-        delegate = self
+//        delegate = self
         // Initialization code
+        vContent.layer.cornerRadius = 10
+        vContent.layer.borderWidth = 1
+        vContent.layer.borderColor = UIColor .green.cgColor
+        btnUpdateStatus.layer.cornerRadius = 5
+        btnUpdateStatus.layer.borderWidth = 1
+        btnUpdateStatus.layer.borderColor = UIColor.gray.cgColor
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -37,6 +44,8 @@ class TaskListTableCell: UITableViewCell,TaskListTableCellDelegate {
         lbName.text = _data.name
         lbDes.text = _data.des
         btnUpdateStatus.isHidden = false
+        btnUpdateStatus.accessibilityValue = _data.taskID
+        btnUpdateStatus.accessibilityLabel = _data.status
         updateStatus(status: _data.status)
         lblCreateDate.text = _data.startDate
         lblDueDate.text = _data.dueDate
@@ -50,14 +59,18 @@ class TaskListTableCell: UITableViewCell,TaskListTableCellDelegate {
             lblStatus.text = "New"
             lblStatus.textColor = UIColor.red
             imgStatus.image = UIImage(named: "ic_status_new")
+            btnUpdateStatus.setTitle("Make In process", for: .normal)
+            btnUpdateStatus.backgroundColor = UIColor.orange
             break
         case "2":
-            lblStatus.text = "in process"
+            lblStatus.text = "In process"
             lblStatus.textColor = UIColor.orange
             imgStatus.image = UIImage(named: "ic_status_inprocess")
+            btnUpdateStatus.setTitle("Make Done", for: .normal)
+            btnUpdateStatus.backgroundColor = UIColor.green
             break
         case "3":
-            lblStatus.text = "done"
+            lblStatus.text = "Done"
             lblStatus.textColor = UIColor.green
             imgStatus.image = UIImage(named: "ic_status_done")
             btnUpdateStatus.isHidden = true
@@ -70,7 +83,7 @@ class TaskListTableCell: UITableViewCell,TaskListTableCellDelegate {
     }
     
     @IBAction func updateStatus_Touchup(_ sender: UIButton) {
-        delegate?.updateStatus(status: "3")
+        delegate?.updateStatusCell(taskId: sender.accessibilityValue!, status: sender.accessibilityLabel! == "1" ? "2" : "3")
     }
     
 }

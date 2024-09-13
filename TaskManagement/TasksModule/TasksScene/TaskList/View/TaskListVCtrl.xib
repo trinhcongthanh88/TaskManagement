@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -24,7 +25,7 @@
                     <rect key="frame" x="0.0" y="59" width="393" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zOA-gh-9Yh">
-                            <rect key="frame" x="0.0" y="0.0" width="196.66666666666666" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="131" height="50"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="View Detail"/>
                             <connections>
@@ -32,29 +33,51 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GlP-KB-YP1" userLabel="Add New">
-                            <rect key="frame" x="196.66666666666663" y="0.0" width="196.33333333333337" height="50"/>
+                            <rect key="frame" x="262" y="0.0" width="131" height="50"/>
+                            <color key="backgroundColor" name="AccentColor"/>
                             <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" title="Add new "/>
+                            <buttonConfiguration key="configuration" style="plain" title="Add new ">
+                                <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <color key="baseForegroundColor" systemColor="systemBackgroundColor"/>
+                            </buttonConfiguration>
                             <connections>
                                 <action selector="btnAddnew:" destination="-1" eventType="touchUpInside" id="uG5-gb-mo8"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WWd-2n-0Oy">
+                            <rect key="frame" x="132" y="0.0" width="129" height="50"/>
+                            <color key="backgroundColor" systemColor="systemRedColor"/>
+                            <color key="tintColor" systemColor="systemBackgroundColor"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="Delete" cornerStyle="dynamic" titleAlignment="center">
+                                <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="baseForegroundColor" systemColor="groupTableViewBackgroundColor"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="btnDeleta:" destination="-1" eventType="touchUpInside" id="akf-1a-Ajm"/>
                             </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstItem="GlP-KB-YP1" firstAttribute="width" secondItem="nYo-Lw-80o" secondAttribute="width" multiplier="0.5" id="4aL-Pu-JSC"/>
+                        <constraint firstItem="WWd-2n-0Oy" firstAttribute="top" secondItem="nYo-Lw-80o" secondAttribute="top" id="2JW-KA-mKB"/>
+                        <constraint firstItem="GlP-KB-YP1" firstAttribute="width" secondItem="nYo-Lw-80o" secondAttribute="width" multiplier="0.333" id="4aL-Pu-JSC"/>
+                        <constraint firstItem="GlP-KB-YP1" firstAttribute="leading" secondItem="WWd-2n-0Oy" secondAttribute="trailing" constant="1" id="5nU-Do-6Xc"/>
+                        <constraint firstItem="WWd-2n-0Oy" firstAttribute="centerY" secondItem="nYo-Lw-80o" secondAttribute="centerY" id="6NX-p5-CQA"/>
                         <constraint firstItem="zOA-gh-9Yh" firstAttribute="top" secondItem="nYo-Lw-80o" secondAttribute="top" id="9nn-5G-qHo"/>
-                        <constraint firstItem="zOA-gh-9Yh" firstAttribute="width" secondItem="nYo-Lw-80o" secondAttribute="width" multiplier="0.5" id="AwM-03-3a8"/>
+                        <constraint firstItem="zOA-gh-9Yh" firstAttribute="width" secondItem="nYo-Lw-80o" secondAttribute="width" multiplier="0.333333" id="AwM-03-3a8"/>
                         <constraint firstAttribute="trailing" secondItem="GlP-KB-YP1" secondAttribute="trailing" id="HAa-sp-chw"/>
                         <constraint firstAttribute="height" constant="50" id="L8G-JW-AQm"/>
                         <constraint firstItem="GlP-KB-YP1" firstAttribute="top" secondItem="nYo-Lw-80o" secondAttribute="top" id="ROQ-65-vTq"/>
+                        <constraint firstAttribute="bottom" secondItem="WWd-2n-0Oy" secondAttribute="bottom" id="TwO-rj-e4A"/>
                         <constraint firstAttribute="bottom" secondItem="zOA-gh-9Yh" secondAttribute="bottom" id="X9b-qs-jVj"/>
                         <constraint firstAttribute="bottom" secondItem="GlP-KB-YP1" secondAttribute="bottom" id="YIt-bM-g7f"/>
+                        <constraint firstItem="WWd-2n-0Oy" firstAttribute="leading" secondItem="zOA-gh-9Yh" secondAttribute="trailing" constant="1" id="lvL-H5-SZJ"/>
                         <constraint firstItem="GlP-KB-YP1" firstAttribute="height" secondItem="zOA-gh-9Yh" secondAttribute="height" id="n1D-fu-j9m"/>
                         <constraint firstItem="zOA-gh-9Yh" firstAttribute="leading" secondItem="nYo-Lw-80o" secondAttribute="leading" id="uOI-HE-Jtt"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="hVH-Ow-XpQ">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="hVH-Ow-XpQ">
                     <rect key="frame" x="0.0" y="114" width="393" height="704"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
@@ -74,8 +97,17 @@
         </view>
     </objects>
     <resources>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

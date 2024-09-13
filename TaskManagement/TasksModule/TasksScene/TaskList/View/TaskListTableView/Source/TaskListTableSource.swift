@@ -18,7 +18,7 @@ class TaskListTableSource: TableViewSource<TaskListTableCell,TaskModel> {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 145
+        return 176
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -51,23 +51,17 @@ class TaskListVCtrl: UIViewController {
     @IBAction func btnViewDetail(_ sender: Any) {
         
 //        Base.navCtrl?.pushViewController(TaskDetailVCtrl(), animated: true)
-        addUpdate.callFuncToDeleteTaskData()
-        getData()
-        taskListSource.lstItem = lstItem
-        UIView.transition(with: tblTaskList,
-                          duration: 0.5,
-                          options: .transitionCrossDissolve,
-                          animations: { self.tblTaskList.reloadData() })
+        
     }
     @IBAction func btnAddnew(_ sender: UIButton) {
 //        Base.navCtrl?.pushViewController(AddUpdateTaskVCtrl(), animated: true)
         addUpdate.callFuncToAddUpdateTaskData()
-        getData()
-        taskListSource.lstItem = lstItem
-        UIView.transition(with: tblTaskList,
-                          duration: 0.5,
-                          options: .transitionCrossDissolve,
-                          animations: { self.tblTaskList.reloadData() })
+        reloadStaskData()
+    }
+    @IBAction func btnDeleta(_ sender: UIButton) {
+//        Base.navCtrl?.pushViewController(AddUpdateTaskVCtrl(), animated: true)
+        addUpdate.callFuncToDeleteTaskData()
+        reloadStaskData()
     }
     /*
     // MARK: - Navigation
@@ -79,13 +73,24 @@ class TaskListVCtrl: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    func reloadStaskData() {
+        getData()
+        taskListSource.lstItem = lstItem
+        UIView.transition(with: tblTaskList,
+                          duration: 0.5,
+                          options: .transitionCrossDissolve,
+                          animations: { self.tblTaskList.reloadData() })
+    }
 
 }
 extension TaskListVCtrl:TaskListTableCellDelegate{
-    func updateStatus(status: String) {
-        
-    }
     
+    
+    func updateStatusCell(taskId: String, status: String) {
+        addUpdate = AddUpdateTaskViewModel()
+        addUpdate.callFuncToUpdateStatusTaskData(taskId: taskId, status: status)
+        reloadStaskData()
+    }
     
 }
 extension TaskListVCtrl:TableViewDelegate{

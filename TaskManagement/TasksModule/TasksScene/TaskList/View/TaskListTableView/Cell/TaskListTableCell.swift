@@ -22,6 +22,7 @@ class TaskListTableCell: UITableViewCell {
     var delegate:TaskListTableCellDelegate?
     
     @IBOutlet weak var btnUpdateStatus: UIButton!
+    @IBOutlet weak var btnPending: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
 //        delegate = self
@@ -32,6 +33,9 @@ class TaskListTableCell: UITableViewCell {
         btnUpdateStatus.layer.cornerRadius = 5
         btnUpdateStatus.layer.borderWidth = 1
         btnUpdateStatus.layer.borderColor = UIColor.gray.cgColor
+        btnPending.layer.cornerRadius = 5
+        btnPending.layer.borderWidth = 1
+        btnPending.layer.borderColor = UIColor.gray.cgColor
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -46,6 +50,8 @@ class TaskListTableCell: UITableViewCell {
         btnUpdateStatus.isHidden = false
         btnUpdateStatus.accessibilityValue = _data.taskID
         btnUpdateStatus.accessibilityLabel = _data.status
+        btnPending.isHidden = false
+        btnPending.accessibilityValue = _data.taskID
         updateStatus(status: _data.status)
         lblCreateDate.text = _data.startDate
         lblDueDate.text = _data.dueDate
@@ -60,20 +66,30 @@ class TaskListTableCell: UITableViewCell {
             lblStatus.textColor = UIColor.red
             imgStatus.image = UIImage(named: "ic_status_new")
             btnUpdateStatus.setTitle("Make In process", for: .normal)
-            btnUpdateStatus.backgroundColor = UIColor.orange
+            btnUpdateStatus.backgroundColor = UIColor.purple
             break
         case "2":
             lblStatus.text = "In process"
-            lblStatus.textColor = UIColor.orange
+            lblStatus.textColor = UIColor.purple
             imgStatus.image = UIImage(named: "ic_status_inprocess")
             btnUpdateStatus.setTitle("Make Done", for: .normal)
             btnUpdateStatus.backgroundColor = UIColor.green
             break
         case "3":
-            lblStatus.text = "Done"
+            lblStatus.text = "Completed"
             lblStatus.textColor = UIColor.green
             imgStatus.image = UIImage(named: "ic_status_done")
             btnUpdateStatus.isHidden = true
+            btnPending.isHidden = true
+            break
+        case "4":
+            lblStatus.text = "Pending"
+            lblStatus.textColor = UIColor.gray
+            imgStatus.image = UIImage(named: "ic_status_pending")
+            btnUpdateStatus.setTitle("Pending", for: .normal)
+            btnUpdateStatus.backgroundColor = UIColor.gray
+            btnUpdateStatus.isHidden = true
+            btnPending.isHidden = true
             break
         default:
             lblStatus.text = "N/a"
@@ -85,5 +101,9 @@ class TaskListTableCell: UITableViewCell {
     @IBAction func updateStatus_Touchup(_ sender: UIButton) {
         delegate?.updateStatusCell(taskId: sender.accessibilityValue!, status: sender.accessibilityLabel! == "1" ? "2" : "3")
     }
+    @IBAction func pending_Touchup(_ sender: UIButton) {
+        delegate?.updateStatusCell(taskId: sender.accessibilityValue!, status: "4")
+    }
+    
     
 }

@@ -9,13 +9,13 @@ import Foundation
 import RealmSwift
 class AddUpdateTaskViewModel : NSObject {
     let realm = try! Realm()
-    var model:TaskModel = TaskModel( taskID: "01", name: "Task 1",des: "",userID: "",userName:"", status: "", createDate: "", startDate: "", dueDate: "", hour: "16")
+    var model:TaskModel!
 //    private var apiService : APIService
-    private(set) var taskModel : TaskModel! {
-        didSet {
-            self.bindAddUpdateTaskViewModelToController()
-        }
-    }
+//    private(set) var taskModel : TaskModel! {
+//        didSet {
+//            self.bindAddUpdateTaskViewModelToController()
+//        }
+//    }
     
     var bindAddUpdateTaskViewModelToController : (() -> ()) = {}
     
@@ -26,22 +26,29 @@ class AddUpdateTaskViewModel : NSObject {
 //        callFuncToAddUpdateTaskData()
     }
     
-    func callFuncToAddUpdateTaskData() {
+    func callFuncToAddTaskData() {
        model = TaskModel()
-        taskModel = model
-        self.saveData(model: self.taskModel)
+//        taskModel = model
+        self.saveData(model: self.model)
     }
     func callFuncToDeleteTaskData() {
-        taskModel = model
-        self.deleteData(model: self.taskModel)
+//        taskModel = model
+        self.deleteData(model: self.model)
     }
     func callFuncToUpdateStatusTaskData(taskId:String ,status:String) {
         self.updateTaskStats(taskId: taskId, status: status)
     }
     
+    func callFuncToUpdateTaskData(model:TaskModel) {
+        self.updateData(model: model)
+    }
+    func callFuncToAddNewTaskData(model:TaskModel) {
+        self.saveData(model: model)
+    }
+    
     private func saveData(model:TaskModel) {
         let randomUUID = UUID()
-        let randomInt = Int.random(in: 1..<4)
+        let randomInt = Int.random(in: 1..<5)
         // Get UUID as string
         let uuidString = randomUUID.uuidString
 //        let today = Date.now
@@ -53,12 +60,12 @@ class AddUpdateTaskViewModel : NSObject {
         data = model
         data.taskID = uuidString
         data.name = data.taskID
-        data.des = "Thuc hien  1 du an ve quan ly Task"
-        data.status = String(randomInt)
-        data.createDate = dateFormatter.string(from: today)
-        data.startDate = dateFormatter.string(from: today)
-        data.dueDate = dateFormatter.string(from: today)
-        data.hour = "16"
+//        data.des = "Thuc hien  1 du an ve quan ly Task"
+//        data.status = String(randomInt)
+//        data.createDate = dateFormatter.string(from: today)
+//        data.startDate = dateFormatter.string(from: today)
+//        data.dueDate = dateFormatter.string(from: today)
+//        data.hour = "16"
             try! realm.write {
                 realm.add(data)
             }

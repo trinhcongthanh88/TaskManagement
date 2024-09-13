@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "icons8-process-48.png",
+      "filename" : "ic_processing.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "icons8-process-48@2x.png",
+      "filename" : "ic_processing@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "icons8-process-48@3x.png",
+      "filename" : "ic_processing@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

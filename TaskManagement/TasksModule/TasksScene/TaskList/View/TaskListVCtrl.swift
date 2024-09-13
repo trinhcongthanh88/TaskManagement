@@ -49,14 +49,28 @@ class TaskListVCtrl: UIViewController {
 
 
     @IBAction func btnViewDetail(_ sender: Any) {
+        let detailVCtrl:AddUpdateTaskVCtrl = AddUpdateTaskVCtrl()
+        detailVCtrl.addUpdate = self.addUpdate
+        detailVCtrl.action = 1
+        detailVCtrl.addUpdateTaskDelegate = self
+        Base.navCtrl?.pushViewController(detailVCtrl, animated: true)
+       
         
-//        Base.navCtrl?.pushViewController(TaskDetailVCtrl(), animated: true)
-        
+    }
+    @IBAction func viewCalendarTouchup(_ sender: UIButton) {
+        let calendarVCtrl:TaskCalendarVCtrl = TaskCalendarVCtrl()
+        calendarVCtrl.lstItem = self.lstItem
+        Base.navCtrl?.pushViewController(calendarVCtrl, animated: true)
     }
     @IBAction func btnAddnew(_ sender: UIButton) {
 //        Base.navCtrl?.pushViewController(AddUpdateTaskVCtrl(), animated: true)
-        addUpdate.callFuncToAddUpdateTaskData()
-        reloadStaskData()
+//        addUpdate.callFuncToAddTaskData()
+        let detailVCtrl:AddUpdateTaskVCtrl = AddUpdateTaskVCtrl()
+        detailVCtrl.addUpdate = self.addUpdate
+        detailVCtrl.action = 0
+        detailVCtrl.addUpdateTaskDelegate = self
+        Base.navCtrl?.pushViewController(detailVCtrl, animated: true)
+//        reloadStaskData()
     }
     @IBAction func btnDeleta(_ sender: UIButton) {
 //        Base.navCtrl?.pushViewController(AddUpdateTaskVCtrl(), animated: true)
@@ -96,7 +110,8 @@ extension TaskListVCtrl:TaskListTableCellDelegate{
 extension TaskListVCtrl:TableViewDelegate{
     func tbv(tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
         let data = lstItem[indexPath.row]
-        addUpdate = AddUpdateTaskViewModel()
+//        modelSelect = data
+//        addUpdate = AddUpdateTaskViewModel()
         addUpdate.model = data
 //        showTaskDetail(task: data)
     }
@@ -105,4 +120,11 @@ extension TaskListVCtrl:TableViewDelegate{
         let vctrl = TaskDetailVCtrl()//ConstructorDetailVCtrl(data:data)
         Base.navCtrl?.pushViewController(vctrl, animated: true)
     }
+}
+extension TaskListVCtrl:AddUpdateTasDelegate{
+    func updateTaskComplete() {
+        reloadStaskData()
+    }
+    
+    
 }

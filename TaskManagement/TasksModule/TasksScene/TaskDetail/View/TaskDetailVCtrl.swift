@@ -9,6 +9,7 @@ import UIKit
 
 class TaskDetailVCtrl: UIViewController {
 
+
     override func viewDidLoad() {
         super.viewDidLoad()
         Base.navCtrl?.topViewController?.title = "Task Detail"
